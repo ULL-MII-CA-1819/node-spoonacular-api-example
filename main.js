@@ -1,3 +1,6 @@
+const util = require('util');
+const inspect = (x) => util.inspect(x, { depth: null });
+
 const unirest = require('unirest');
 
 const API_KEY = "btSAgzlS6CmshxyNyEh24vDF8sl2p1w43h9jsnCABHsQZSfxx6";
@@ -32,12 +35,14 @@ function getRecipeData(recipeList) {
         unirest.get(requestString)
             .header("X-RapidAPI-Key", API_KEY)
             .end(result => {
-                console.log(result);
+                console.log(inspect(result.body));
+                /*
                 if (result.status === 200) {
                     result.body.map(result =>
                         console.log(result.title + " -- " + "Weight Watchers Smart Points: " + result.weightWatcherSmartPoints + " -- Instructions: " + result.instructions)
                     );
                 };
+                */
             });
     } catch (e) {
         throw (e);
